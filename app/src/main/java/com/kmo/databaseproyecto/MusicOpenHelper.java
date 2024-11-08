@@ -1,5 +1,6 @@
 package com.kmo.databaseproyecto;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -33,6 +34,18 @@ public class MusicOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(MUSIC_TABLE_CREATE);
     }
+    public boolean updateSong(int id, String nombreCancion, String artista, byte[] imagenCancion) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_NOMBRE_CANCION, nombreCancion);
+        values.put(KEY_ARTISTA, artista);
+        values.put(KEY_IMAGEN_CANCION, imagenCancion);
+
+        // Actualiza la fila donde el id coincide con el id de la canción
+        int result = db.update(MUSIC_TABLE_NAME, values, KEY_ID + " = ?", new String[]{String.valueOf(id)});
+        return result > 0;
+    }
+
 
     // Método onUpgrade para manejar actualizaciones de la base de datos
     @Override

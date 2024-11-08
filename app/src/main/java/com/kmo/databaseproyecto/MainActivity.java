@@ -102,9 +102,6 @@ public class MainActivity extends AppCompatActivity {
     private void loadSongs() {
         // Esto es solo un ejemplo. Puedes cargar canciones desde una base de datos o archivo si lo deseas.
         songList.add(new Song("Canción 1", "Artista 1", null));
-        songList.add(new Song("Canción 2", "Artista 2", null));
-        songList.add(new Song("Canción 3", "Artista 3", null));
-
         songAdapter.notifyDataSetChanged();
     }
 
