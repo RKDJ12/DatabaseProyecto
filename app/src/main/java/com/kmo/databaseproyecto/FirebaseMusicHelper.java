@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.util.Base64;
 import android.widget.Toast;
+
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 import com.squareup.picasso.Picasso;
@@ -27,8 +29,8 @@ public class FirebaseMusicHelper {
         // Creamos un objeto Song
         Song song = new Song(nombreCancion, artista, imageUrl);
 
-        // Si el id es nulo o vacío, es una nueva canción, así que creamos un nuevo documento
         if (id == null || id.isEmpty()) {
+            // Crear un nuevo documento en Firestore con un ID generado automáticamente
             db.collection("songs")
                     .add(song)
                     .addOnSuccessListener(documentReference -> {
@@ -50,7 +52,6 @@ public class FirebaseMusicHelper {
                     });
         }
     }
-
     // Método para cargar imágenes de Firebase y convertirlas a base64 (si es necesario para Firestore)
     private void loadImageToBase64(String imageUrl, final ImageUploadCallback callback) {
         Picasso.get().load(imageUrl).into(new Target() {

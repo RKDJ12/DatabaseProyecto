@@ -6,6 +6,9 @@ public class Song {
     private String artista;
     private String imageUrl;  // Usaremos la URL de la imagen en lugar del Drawable
 
+    public Song(){
+
+    }
     public Song(String nombre, String artista, String imageUrl) {
         this.nombre = nombre;
         this.artista = artista;

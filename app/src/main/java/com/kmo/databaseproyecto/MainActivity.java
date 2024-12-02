@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         loadSongs();
 
         // Acción del botón para agregar una canción
+        // Acción del botón para agregar una canción
         btnAgregarC.setOnClickListener(v -> {
             String nombre = txtNombre.getText().toString().trim();
             String artista = txtArtista.getText().toString().trim();
@@ -67,12 +68,16 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 String imageUrl = "https://example.com/imagen.jpg";  // Aquí deberías poner la URL de la imagen seleccionada
                 if (selectedSongId.isEmpty()) {  // Si no hay canción seleccionada, agregar una nueva
-                    addNewSong(nombre, artista, imageUrl);
+                    FirebaseMusicHelper helper = new FirebaseMusicHelper(MainActivity.this);
+                    helper.addOrUpdateSong(null, nombre, artista, imageUrl); // Pasamos null para generar un nuevo ID automáticamente
                 } else {  // Si hay una canción seleccionada, la actualizamos
-                    updateSong(selectedSongId, nombre, artista, imageUrl);
+                    FirebaseMusicHelper helper = new FirebaseMusicHelper(MainActivity.this);
+                    helper.addOrUpdateSong(selectedSongId, nombre, artista, imageUrl); // Usamos el ID de la canción seleccionada
                 }
             }
         });
+
+
 
         // Acción del botón para eliminar una canción
         btEliminarC.setOnClickListener(v -> {
