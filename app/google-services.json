@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "244833495090",
+    "firebase_url": "https://esp32-firebase-demo-62e93-default-rtdb.firebaseio.com",
+    "project_id": "esp32-firebase-demo-62e93",
+    "storage_bucket": "esp32-firebase-demo-62e93.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:244833495090:android:cfc644eed60eccf817b42b",
+        "android_client_info": {
+          "package_name": "com.kmo.databaseproyecto"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbIiHAobE8Qbk5-6n3siWGGdjcwjP3TrY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
