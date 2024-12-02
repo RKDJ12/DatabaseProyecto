@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -13,6 +12,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,7 +27,8 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerViewSongs;
     private SongAdapter songAdapter;
     private ArrayList<Song> songList;
-    private int selectedSongIndex = -1; // Variable to keep track of the selected song for deletion
+    private FirebaseFirestore db;
+    private CollectionReference songsCollection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,13 +44,17 @@ public class MainActivity extends AppCompatActivity {
         imagenCancion = findViewById(R.id.imagenCancion);
         recyclerViewSongs = findViewById(R.id.recyclerViewSongs);
 
-        // Inicializamos la lista de canciones
+        // Inicializamos Firestore
+        db = FirebaseFirestore.getInstance();
+        songsCollection = db.collection("songs");
+
+        // Inicializamos la lista de canciones y el adaptador
         songList = new ArrayList<>();
         songAdapter = new SongAdapter(songList, this);
         recyclerViewSongs.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewSongs.setAdapter(songAdapter);
 
-        // Cargar las canciones al inicio (si es necesario)
+        // Cargar canciones desde Firestore
         loadSongs();
 
         // Acción del botón para agregar canción
@@ -57,24 +65,21 @@ public class MainActivity extends AppCompatActivity {
             if (nombre.isEmpty() || artista.isEmpty()) {
                 Toast.makeText(MainActivity.this, "Por favor ingrese nombre y artista", Toast.LENGTH_SHORT).show();
             } else {
-                Song newSong = new Song(nombre, artista, imagenCancion.getDrawable());
-                songList.add(newSong);
-                songAdapter.notifyDataSetChanged();
-                txtNombre.setText("");
-                txtArtista.setText("");
-                imagenCancion.setImageResource(0); // Limpiar la imagen seleccionada
+                String imageUrl = ""; // Aquí deberías poner la URL de la imagen si la tienes
+
+                // Agregar la canción a Firestore
+                Song newSong = new Song(nombre, artista, imageUrl);
+                songsCollection.add(newSong)
+                        .addOnSuccessListener(documentReference -> {
+                            Toast.makeText(MainActivity.this, "Canción agregada", Toast.LENGTH_SHORT).show();
+                            loadSongs(); // Recargar las canciones
+                        });
             }
         });
 
         // Acción del botón para eliminar canción
         btEliminarC.setOnClickListener(v -> {
-            if (selectedSongIndex != -1) {
-                songList.remove(selectedSongIndex);
-                songAdapter.notifyItemRemoved(selectedSongIndex);
-                selectedSongIndex = -1; // Reset the selected song index
-            } else {
-                Toast.makeText(MainActivity.this, "No hay canción seleccionada para eliminar", Toast.LENGTH_SHORT).show();
-            }
+            // Implementar eliminación de canción (si tienes un identificador único para cada canción)
         });
 
         // Acción del botón para seleccionar imagen
@@ -83,26 +88,21 @@ public class MainActivity extends AppCompatActivity {
             intent.setType("image/*");
             startActivityForResult(intent, PICK_IMAGE_REQUEST);
         });
-
-        // Configuración para la selección de imagen
-        songAdapter.setOnSongClickListener((position) -> {
-            selectedSongIndex = position;
-            Song selectedSong = songList.get(position);
-            txtNombre.setText(selectedSong.getNombre());
-            txtArtista.setText(selectedSong.getArtista());
-            if (selectedSong.getImage() != null) {
-                imagenCancion.setImageDrawable(selectedSong.getImage());
-            } else {
-                imagenCancion.setImageResource(0); // Reset the image if none selected
-            }
-        });
     }
 
-    // Método para cargar las canciones (puede ser desde una base de datos o almacenamiento local)
+    // Método para cargar las canciones desde Firestore
     private void loadSongs() {
-        // Esto es solo un ejemplo. Puedes cargar canciones desde una base de datos o archivo si lo deseas.
-        songList.add(new Song("Canción 1", "Artista 1", null));
-        songAdapter.notifyDataSetChanged();
+        songsCollection.get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    songList.clear();
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        for (DocumentSnapshot snapshot : queryDocumentSnapshots.getDocuments()) {
+                            Song song = snapshot.toObject(Song.class);
+                            songList.add(song);
+                        }
+                        songAdapter.notifyDataSetChanged();
+                    }
+                });
     }
 
     // Método para manejar la imagen seleccionada desde la galería

@@ -1,16 +1,16 @@
 package com.kmo.databaseproyecto;
 
-import android.graphics.drawable.Drawable;
 
 public class Song {
     private String nombre;
     private String artista;
-    private Drawable image;
+    private String imageUrl;
 
-    public Song(String nombre, String artista, Drawable image) {
+
+    public Song(String nombre, String artista, String imageUrl) {
         this.nombre = nombre;
         this.artista = artista;
-        this.image = image;
+        this.imageUrl = imageUrl;
     }
 
     public String getNombre() {
@@ -29,11 +29,11 @@ public class Song {
         this.artista = artista;
     }
 
-    public Drawable getImage() {
-        return image;
+    public String  getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImage(Drawable image) {
-        this.image = image;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

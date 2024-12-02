@@ -8,10 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
+import com.squareup.picasso.Picasso; // Usamos Picasso para cargar la imagen desde una URL
 import java.util.ArrayList;
 
-public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder> {
-
+public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder>{
     private ArrayList<Song> songList;
     private Context context;
     private OnSongClickListener onSongClickListener;
@@ -26,14 +26,15 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
         View itemView = LayoutInflater.from(context).inflate(R.layout.song_item, parent, false);
         return new SongViewHolder(itemView);
     }
-
     @Override
     public void onBindViewHolder(SongViewHolder holder, int position) {
         Song song = songList.get(position);
         holder.txtNombre.setText(song.getNombre());
         holder.txtArtista.setText(song.getArtista());
-        if (song.getImage() != null) {
-            holder.imagen.setImageDrawable(song.getImage());
+
+        // Usamos Picasso para cargar la imagen desde la URL
+        if (song.getImageUrl() != null) {
+            Picasso.get().load(song.getImageUrl()).into(holder.imagen);
         }
     }
 
