@@ -1,16 +1,25 @@
 package com.kmo.databaseproyecto;
 
-
 public class Song {
+    private String id;
     private String nombre;
     private String artista;
-    private String imageUrl;
-
+    private String imageUrl;  // Usaremos la URL de la imagen en lugar del Drawable
 
     public Song(String nombre, String artista, String imageUrl) {
         this.nombre = nombre;
         this.artista = artista;
         this.imageUrl = imageUrl;
+    }
+
+    // Getters y setters
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -29,7 +38,7 @@ public class Song {
         this.artista = artista;
     }
 
-    public String  getImageUrl() {
+    public String getImageUrl() {
         return imageUrl;
     }
 
