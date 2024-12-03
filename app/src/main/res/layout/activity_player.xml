@@ -4,19 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/black"
     tools:context=".PlayerActivity">
 
-    <!-- Imagen de la portada del álbum centrada -->
-
-    <!-- Título de la canción -->
-
-    <!-- Nombre del artista -->
-
-    <!-- Botón Play/Pause -->
-
-    <!-- Barra de progreso -->
-
-    <!-- Tiempo de reproducción -->
 
     <ImageView
         android:id="@+id/albumCover"
@@ -28,7 +18,7 @@
         android:layout_marginBottom="324dp"
         android:contentDescription="Album Cover"
         android:scaleType="centerCrop"
-        android:src="@drawable/album_default"
+        android:src="@drawable/logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,12 +43,12 @@
 
     <TextView
         android:id="@+id/artistName"
-        android:layout_width="130dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="110dp"
-        android:layout_marginEnd="141dp"
-        android:layout_marginBottom="586dp"
+        android:layout_width="205dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="101dp"
+        android:layout_marginEnd="102dp"
+        android:layout_marginBottom="577dp"
         android:gravity="center"
         android:text="Artist Name"
         android:textColor="#b3b3b3"
@@ -70,14 +60,19 @@
 
     <ImageButton
         android:id="@+id/btnPlayPause"
-        android:layout_width="63dp"
+        android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_marginStart="171dp"
         android:layout_marginTop="623dp"
         android:layout_marginEnd="177dp"
         android:layout_marginBottom="52dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_play"
+        android:clickable="true"
+        android:contentDescription="@string/play"
+        android:focusable="true"
+        android:importantForAccessibility="yes"
+        android:scaleType="centerCrop"
+        android:src="@drawable/play"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -89,9 +84,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="578dp"
         android:layout_marginBottom="153dp"
+        android:indeterminate="false"
         android:max="100"
         android:progress="0"
         android:progressDrawable="@drawable/seekbar_progress"
+        android:progressTint="@color/red"
         android:thumb="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -137,11 +134,18 @@
         android:layout_marginEnd="270dp"
         android:layout_marginBottom="52dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_previous"
+        android:clickable="true"
+        android:contentDescription="@string/previus_btn"
+        android:focusable="true"
+        android:importantForAccessibility="yes"
+        android:scaleType="centerCrop"
+        android:src="@drawable/previous"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
         android:id="@+id/btnNext"
@@ -152,10 +156,18 @@
         android:layout_marginEnd="96dp"
         android:layout_marginBottom="52dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_next"
+        android:clickable="true"
+        android:contentDescription="@string/next_btn"
+        android:focusable="true"
+        android:importantForAccessibility="yes"
+
+        android:scaleType="centerCrop"
+        android:src="@drawable/nextr"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.568" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

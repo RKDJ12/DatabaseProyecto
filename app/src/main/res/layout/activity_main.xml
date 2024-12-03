@@ -53,6 +53,7 @@
     <!-- Botón para seleccionar una imagen -->
     <android.widget.Button
         android:id="@+id/btImagen"
+        android:src="@drawable/imageS"
         android:layout_width="173dp"
         android:layout_height="53dp"
         android:layout_marginStart="9dp"
