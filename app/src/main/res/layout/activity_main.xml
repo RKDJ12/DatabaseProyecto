@@ -6,19 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!-- Titulo de la Actividad -->
+    <TextView
+        android:id="@+id/tvTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="VAO Reproductor"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <!-- Campo para el nombre de la canción -->
     <android.widget.EditText
         android:id="@+id/txtNombre"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
         android:hint="Nombre de la canción"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/txtArtista"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/tvTitulo" />
 
     <!-- Campo para el nombre del artista -->
     <android.widget.EditText
@@ -26,98 +37,94 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
         android:hint="Artista"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/imagenCancion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtNombre" />
+        app:layout_constraintTop_toBottomOf="@id/txtNombre" />
 
     <!-- Imagen seleccionada para la canción -->
-
-    <!-- Botón para seleccionar una imagen -->
     <android.widget.ImageView
         android:id="@+id/imagenCancion"
         android:layout_width="163dp"
         android:layout_height="116dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="28dp"
-        android:layout_marginBottom="457dp"
+        android:layout_marginBottom="16dp"
         android:src="@drawable/logo"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.875"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtArtista" />
+        app:layout_constraintTop_toBottomOf="@id/txtArtista" />
 
-    <!-- Botón para agregar la canción -->
-
-    <!-- Botón para eliminar canción seleccionada -->
+    <!-- Botón para seleccionar una imagen -->
     <android.widget.Button
         android:id="@+id/btImagen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="278dp"
-        android:layout_marginEnd="223dp"
-        android:layout_marginBottom="405dp"
         android:text="Seleccionar Imagen"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/imagenCancion" />
 
+    <!-- Botón para agregar la canción -->
     <android.widget.Button
         android:id="@+id/btnAgregarC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:text="Agregar Canción"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.138"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btImagen" />
+        app:layout_constraintTop_toBottomOf="@id/btImagen" />
 
+    <!-- Botón para eliminar canción seleccionada -->
     <android.widget.Button
         android:id="@+id/btEliminarC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="129dp"
-        android:layout_marginBottom="249dp"
         android:text="Eliminar Canción"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAgregarC" />
+        app:layout_constraintTop_toBottomOf="@id/btnAgregarC" />
 
     <!-- Botón para seleccionar el archivo de audio -->
-
-    <!-- RecyclerView para mostrar la lista de canciones -->
     <android.widget.Button
         android:id="@+id/btSeleccionarAudio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="218dp"
-        android:layout_marginTop="352dp"
-        android:layout_marginEnd="33dp"
-        android:layout_marginBottom="331dp"
+        android:layout_marginTop="20dp"
         android:text="Seleccionar Audio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btEliminarC" />
+
+    <!-- RecyclerView para mostrar la lista de canciones -->
+
+    <!-- Botón para abrir el reproductor -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewSongs"
+        android:layout_width="411dp"
+        android:layout_height="166dp"
+        tools:layout_editor_absoluteY="565dp" />
+
+    <ImageButton
+        android:id="@+id/btnGoToPlayer"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="336dp"
+        android:layout_marginTop="196dp"
+        android:layout_marginEnd="19dp"
+        android:layout_marginBottom="479dp"
+        android:background="@android:color/transparent"
+        android:clickable="true"
+        android:contentDescription="Go to Player"
+        android:src="@drawable/reproductor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewSongs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="532dp"
-        android:layout_marginBottom="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

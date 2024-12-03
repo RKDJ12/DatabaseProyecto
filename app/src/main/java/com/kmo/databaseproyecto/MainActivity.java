@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView imagenCancion;
     private Button btnAgregarC, btImagen, btSeleccionarAudio;
     private RecyclerView recyclerViewSongs;
+    private ImageButton btnReproductor;
 
     private ArrayList<Song> songList = new ArrayList<>();
     private SongAdapter songAdapter;
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Inicializar vistas
+        btnReproductor = findViewById(R.id.btnGoToPlayer);
         txtNombre = findViewById(R.id.txtNombre);
         txtArtista = findViewById(R.id.txtArtista);
         imagenCancion = findViewById(R.id.imagenCancion);
@@ -53,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         btImagen = findViewById(R.id.btImagen);
         btSeleccionarAudio = findViewById(R.id.btSeleccionarAudio);
         recyclerViewSongs = findViewById(R.id.recyclerViewSongs);
+
 
         // Configurar RecyclerView
         songAdapter = new SongAdapter(songList);
@@ -77,6 +81,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+        btnReproductor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,PlayerActivity.class);
+                startActivity(intent);
+            }
+        });
         // Funcionalidad para seleccionar imagen
         btImagen.setOnClickListener(v -> openImagePicker());
 
@@ -86,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
         // Funcionalidad para agregar canción
         btnAgregarC.setOnClickListener(v -> addSong());
     }
-
     // Método para seleccionar imagen
     private void openImagePicker() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);

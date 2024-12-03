@@ -7,167 +7,121 @@
     android:background="@android:color/black"
     tools:context=".PlayerActivity">
 
-
+    <!-- Imagen de la carátula del álbum -->
     <ImageView
         android:id="@+id/albumCover"
         android:layout_width="218dp"
         android:layout_height="210dp"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="197dp"
-        android:layout_marginEnd="97dp"
-        android:layout_marginBottom="324dp"
         android:contentDescription="Album Cover"
         android:scaleType="centerCrop"
         android:src="@drawable/logo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/songTitle"
+        android:layout_marginTop="100dp" />
 
+    <!-- Título de la canción -->
     <TextView
         android:id="@+id/songTitle"
-        android:layout_width="271dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="429dp"
-        android:layout_marginEnd="70dp"
-        android:layout_marginBottom="256dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Song Title"
         android:textColor="#ffffff"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/albumCover"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp" />
 
+    <!-- Nombre del artista -->
     <TextView
         android:id="@+id/artistName"
-        android:layout_width="205dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="104dp"
-        android:layout_marginTop="101dp"
-        android:layout_marginEnd="102dp"
-        android:layout_marginBottom="577dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Artist Name"
         android:textColor="#b3b3b3"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/songTitle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/btnPlayPause"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="171dp"
-        android:layout_marginTop="623dp"
-        android:layout_marginEnd="177dp"
-        android:layout_marginBottom="52dp"
-        android:background="@android:color/transparent"
-        android:clickable="true"
-        android:contentDescription="@string/play"
-        android:focusable="true"
-        android:importantForAccessibility="yes"
-        android:scaleType="centerCrop"
-        android:src="@drawable/play"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="10dp" />
 
+    <!-- Barra de progreso (SeekBar) -->
     <SeekBar
         android:id="@+id/progressBar"
-        android:layout_width="411dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="578dp"
-        android:layout_marginBottom="153dp"
-        android:indeterminate="false"
         android:max="100"
         android:progress="0"
         android:progressDrawable="@drawable/seekbar_progress"
         android:progressTint="@color/red"
         android:thumb="@android:color/transparent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/artistName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp" />
 
+    <!-- Tiempo de la canción (actual) -->
     <TextView
         android:id="@+id/songTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="368dp"
-        android:layout_marginTop="586dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="126dp"
         android:text="0:00"
         android:textColor="#b3b3b3"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/progressBar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp" />
 
-    <!-- Botones de control (skip, repeat, shuffle) -->
+    <!-- Botón Play/Pause -->
+    <ImageButton
+        android:id="@+id/btnPlayPause"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/play"
+        android:contentDescription="@string/play"
+        app:layout_constraintTop_toBottomOf="@id/songTime"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp" />
+
+    <!-- Panel de control de la música (botones de skip, repeat, shuffle) -->
     <LinearLayout
         android:id="@+id/controlPanel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/btnPlayPause"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/songTime">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="30dp">
+
+        <!-- Botón para anterior canción -->
+        <ImageButton
+            android:id="@+id/btnPrevious"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/previous"
+            android:contentDescription="@string/previous_btn"
+            android:layout_marginEnd="20dp" />
+
+        <!-- Botón para siguiente canción -->
+        <ImageButton
+            android:id="@+id/btnNext"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/nextr"
+            android:contentDescription="@string/next_btn"
+            android:layout_marginStart="20dp" />
 
     </LinearLayout>
-
-    <ImageButton
-        android:id="@+id/btnPrevious"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="85dp"
-        android:layout_marginTop="623dp"
-        android:layout_marginEnd="270dp"
-        android:layout_marginBottom="52dp"
-        android:background="@android:color/transparent"
-        android:clickable="true"
-        android:contentDescription="@string/previus_btn"
-        android:focusable="true"
-        android:importantForAccessibility="yes"
-        android:scaleType="centerCrop"
-        android:src="@drawable/previous"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <ImageButton
-        android:id="@+id/btnNext"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="259dp"
-        android:layout_marginTop="623dp"
-        android:layout_marginEnd="96dp"
-        android:layout_marginBottom="52dp"
-        android:background="@android:color/transparent"
-        android:clickable="true"
-        android:contentDescription="@string/next_btn"
-        android:focusable="true"
-        android:importantForAccessibility="yes"
-
-        android:scaleType="centerCrop"
-        android:src="@drawable/nextr"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.568" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

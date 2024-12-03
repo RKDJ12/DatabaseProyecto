@@ -1,6 +1,7 @@
 package com.kmo.databaseproyecto;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,11 +39,12 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
         holder.titleTextView.setText(song.getTitle());
         holder.artistTextView.setText(song.getArtist());
 
-        // Si tienes la imagen de la canción (Uri), la puedes cargar usando un ImageView.
+        // Si tienes la imagen de la canción (URI), la puedes cargar usando un ImageView.
         if (song.getImageUri() != null) {
             holder.songImageView.setImageURI(Uri.parse(song.getImageUri()));
         }
     }
+
 
     @Override
     public int getItemCount() {
