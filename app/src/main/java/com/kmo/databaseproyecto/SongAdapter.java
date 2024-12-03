@@ -1,41 +1,55 @@
 package com.kmo.databaseproyecto;
 
-import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.recyclerview.widget.RecyclerView;
-import com.squareup.picasso.Picasso; // Usamos Picasso para cargar la imagen desde una URL
-import java.util.ArrayList;
 
-public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder>{
-    private ArrayList<Song> songList;
-    private Context context;
-    private OnSongClickListener onSongClickListener;
+import java.util.List;
 
-    public SongAdapter(ArrayList<Song> songList, Context context) {
+public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder> {
+
+    private List<Song> songList;
+    private OnItemClickListener onItemClickListener;
+
+    // Interfaz para el manejo de clics
+    public interface OnItemClickListener {
+        void onItemClick(Song song);
+    }
+
+    // Constructor
+    public SongAdapter(List<Song> songList, OnItemClickListener onItemClickListener) {
         this.songList = songList;
-        this.context = context;
+        this.onItemClickListener = onItemClickListener;
     }
 
     @Override
     public SongViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(context).inflate(R.layout.song_item, parent, false);
-        return new SongViewHolder(itemView);
+        // Inflar el layout del ítem
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.song_item, parent, false);
+        return new SongViewHolder(view);
     }
+
     @Override
     public void onBindViewHolder(SongViewHolder holder, int position) {
+        // Obtener la canción actual
         Song song = songList.get(position);
-        holder.txtNombre.setText(song.getNombre());
-        holder.txtArtista.setText(song.getArtista());
 
-        // Usamos Picasso para cargar la imagen desde la URL
-        if (song.getImageUrl() != null) {
-            Picasso.get().load(song.getImageUrl()).into(holder.imagen);
-        }
+        // Asignar los datos al ViewHolder
+        holder.titleTextView.setText(song.getTitle());
+        holder.artistTextView.setText(song.getArtist());
+        holder.albumCoverImageView.setImageResource(song.getAlbumCoverResId());
+
+        // Establecer el comportamiento del clic en la canción
+        holder.itemView.setOnClickListener(v -> {
+            // Llamar al listener cuando se hace clic en un ítem
+            if (onItemClickListener != null) {
+                onItemClickListener.onItemClick(song);
+            }
+        });
     }
 
     @Override
@@ -43,30 +57,18 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
         return songList.size();
     }
 
-    public void setOnSongClickListener(OnSongClickListener listener) {
-        this.onSongClickListener = listener;
-    }
+    // ViewHolder que contiene los elementos de cada canción
+    public static class SongViewHolder extends RecyclerView.ViewHolder {
 
-    public interface OnSongClickListener {
-        void onSongClick(int position);
-    }
-
-    public class SongViewHolder extends RecyclerView.ViewHolder {
-
-        public TextView txtNombre, txtArtista;
-        public ImageView imagen;
+        TextView titleTextView;
+        TextView artistTextView;
+        ImageView albumCoverImageView;
 
         public SongViewHolder(View itemView) {
             super(itemView);
-            txtNombre = itemView.findViewById(R.id.txtNombreSong);
-            txtArtista = itemView.findViewById(R.id.txtArtistaSong);
-            imagen = itemView.findViewById(R.id.imagenSong);
-
-            itemView.setOnClickListener(v -> {
-                if (onSongClickListener != null) {
-                    onSongClickListener.onSongClick(getAdapterPosition());
-                }
-            });
+            titleTextView = itemView.findViewById(R.id.songTitle);
+            artistTextView = itemView.findViewById(R.id.txtArtist);
+            albumCoverImageView = itemView.findViewById(R.id.imgSongCover);
         }
     }
 }

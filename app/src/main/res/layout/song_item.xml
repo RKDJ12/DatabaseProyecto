@@ -1,58 +1,44 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!-- song_item.xml -->
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="4dp"
     android:layout_margin="8dp"
-    tools:context=".MainActivity">
+    android:elevation="4dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="8dp">
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <!-- Imagen de la canción -->
         <ImageView
-            android:id="@+id/imagenSong"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_gravity="center_vertical"
+            android:id="@+id/imgSongCover"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginEnd="16dp"
-            android:src="@drawable/ic_launcher_foreground" />
+            android:src="@drawable/logo"/>
 
-        <!-- Contenido de la canción -->
         <LinearLayout
+            android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_weight="1">
 
-            <!-- Nombre de la canción -->
             <TextView
-                android:id="@+id/txtNombreSong"
+                android:id="@+id/txtSongTitle"
+                android:text="Song Title"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nombre de la canción"
-                android:textSize="16sp"
-                android:textColor="#000000"
-                android:ellipsize="end"
-                android:maxLines="1"/>
+                android:layout_height="wrap_content"/>
 
-            <!-- Artista de la canción -->
             <TextView
-                android:id="@+id/txtArtistaSong"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nombre del artista"
+                android:id="@+id/txtArtist"
+                android:text="Artist Name"
                 android:textSize="14sp"
-                android:textColor="#7f7f7f"
-                android:ellipsize="end"
-                android:maxLines="1"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
-
     </LinearLayout>
+
 </androidx.cardview.widget.CardView>

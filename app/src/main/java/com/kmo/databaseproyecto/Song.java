@@ -2,21 +2,21 @@ package com.kmo.databaseproyecto;
 
 public class Song {
     private String id;
-    private String nombre;
-    private String artista;
-    private String imageUrl;  // Usaremos la URL de la imagen en lugar del Drawable
+    private String title;
+    private String artist;
+    private String imageUrl;  // Ahora es String
+    private String audioUrl;  // Ahora es String
 
-    public Song(){
-
-    }
-    public Song(String nombre, String artista, String imageUrl) {
-        this.nombre = nombre;
-        this.artista = artista;
+    // Constructor modificado
+    public Song(String id, String title, String artist, String imageUrl, String audioUrl) {
+        this.id = id;
+        this.title = title;
+        this.artist = artist;
         this.imageUrl = imageUrl;
+        this.audioUrl = audioUrl;
     }
 
-    // Getters y setters
-
+    // Métodos getter y setter
     public String getId() {
         return id;
     }
@@ -25,20 +25,20 @@ public class Song {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getTitle() {
+        return title;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getArtista() {
-        return artista;
+    public String getArtist() {
+        return artist;
     }
 
-    public void setArtista(String artista) {
-        this.artista = artista;
+    public void setArtist(String artist) {
+        this.artist = artist;
     }
 
     public String getImageUrl() {
@@ -47,5 +47,17 @@ public class Song {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getAudioUrl() {
+        return audioUrl;
+    }
+
+    public void setAudioUrl(String audioUrl) {
+        this.audioUrl = audioUrl;
+    }
+
+    public int getAlbumCoverResId() {
+        return 0;
     }
 }
