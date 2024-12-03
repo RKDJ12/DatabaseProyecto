@@ -1,5 +1,6 @@
 package com.kmo.databaseproyecto;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,48 +9,39 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder> {
 
-    private List<Song> songList;
-    private OnItemClickListener onItemClickListener;
-
-    // Interfaz para el manejo de clics
-    public interface OnItemClickListener {
-        void onItemClick(Song song);
-    }
+    private ArrayList<Song> songList;
+    private Context context;
 
     // Constructor
-    public SongAdapter(List<Song> songList, OnItemClickListener onItemClickListener) {
+    public SongAdapter(ArrayList<Song> songList) {
         this.songList = songList;
-        this.onItemClickListener = onItemClickListener;
     }
 
     @Override
     public SongViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // Inflar el layout del ítem
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.song_item, parent, false);
-        return new SongViewHolder(view);
+        // Inflar la vista para cada item del RecyclerView
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.song_item, parent, false);
+        context = parent.getContext();
+        return new SongViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(SongViewHolder holder, int position) {
-        // Obtener la canción actual
         Song song = songList.get(position);
 
-        // Asignar los datos al ViewHolder
+        // Establecer los valores en el ViewHolder
         holder.titleTextView.setText(song.getTitle());
         holder.artistTextView.setText(song.getArtist());
-        holder.albumCoverImageView.setImageResource(song.getAlbumCoverResId());
 
-        // Establecer el comportamiento del clic en la canción
-        holder.itemView.setOnClickListener(v -> {
-            // Llamar al listener cuando se hace clic en un ítem
-            if (onItemClickListener != null) {
-                onItemClickListener.onItemClick(song);
-            }
-        });
+        // Si tienes la imagen de la canción (Uri), la puedes cargar usando un ImageView.
+        if (song.getImageUri() != null) {
+            holder.songImageView.setImageURI(Uri.parse(song.getImageUri()));
+        }
     }
 
     @Override
@@ -57,18 +49,17 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
         return songList.size();
     }
 
-    // ViewHolder que contiene los elementos de cada canción
+    // ViewHolder para la canción
     public static class SongViewHolder extends RecyclerView.ViewHolder {
-
-        TextView titleTextView;
-        TextView artistTextView;
-        ImageView albumCoverImageView;
+        public TextView titleTextView;
+        public TextView artistTextView;
+        public ImageView songImageView;
 
         public SongViewHolder(View itemView) {
             super(itemView);
             titleTextView = itemView.findViewById(R.id.songTitle);
-            artistTextView = itemView.findViewById(R.id.txtArtist);
-            albumCoverImageView = itemView.findViewById(R.id.imgSongCover);
+            artistTextView = itemView.findViewById(R.id.songArtist);
+            songImageView = itemView.findViewById(R.id.songImage);
         }
     }
 }
