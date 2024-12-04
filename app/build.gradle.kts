@@ -35,8 +35,11 @@ android {
 
 dependencies {
 
-    implementation("com.github.bumptech.glide:glide:4.13.0")
-    annotationProcessor ("com.github.bumptech.glide:compiler:4.13.0")
+
+    implementation("com.github.bumptech.glide:glide:4.15.1")
+    implementation(libs.firebase.database)
+    implementation(libs.recyclerview)
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.15.1")
     implementation(libs.picasso)
     implementation(libs.appcompat)
     implementation(libs.material)
@@ -44,6 +47,7 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.storage)
+    implementation("org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.0")
 
     //test
     testImplementation(libs.junit)

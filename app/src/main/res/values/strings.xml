@@ -3,4 +3,5 @@
     <string name="previus_btn">Anterior</string>
     <string name="next_btn">Siguiente</string>
     <string name="play">play</string>
+    <string name="previous_btn" />
 </resources>

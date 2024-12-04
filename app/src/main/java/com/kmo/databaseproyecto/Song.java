@@ -1,20 +1,27 @@
 package com.kmo.databaseproyecto;
 
-public class Song {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Song implements Parcelable {
     private String title;
     private String artist;
-    private String audioFileName;  // Ruta del archivo de audio
-    private String imageUri;  // URI de la imagen (como String)
+    private String audioPath;
+    private String imagePath;
 
-    // Constructor
-    public Song(String title, String artist, String audioFileName, String imageUri) {
-        this.title = title;
-        this.artist = artist;
-        this.audioFileName = audioFileName;
-        this.imageUri = imageUri;
+    // Constructor vacío (necesario para la deserialización)
+    public Song() {
     }
 
-    // Métodos getter y setter
+    // Constructor con parámetros
+    public Song(String title, String artist, String audioPath, String imagePath) {
+        this.title = title;
+        this.artist = artist;
+        this.audioPath = audioPath;
+        this.imagePath = imagePath;
+    }
+
+    // Métodos Getter y Setter
     public String getTitle() {
         return title;
     }
@@ -31,19 +38,55 @@ public class Song {
         this.artist = artist;
     }
 
-    public String getAudioFileName() {
-        return audioFileName;
+    public String getAudioPath() {
+        return audioPath;
     }
 
-    public void setAudioFileName(String audioFileName) {
-        this.audioFileName = audioFileName;
+    public void setAudioPath(String audioPath) {
+        this.audioPath = audioPath;
     }
 
-    public String getImageUri() {
-        return imageUri;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public void setImageUri(String imageUri) {
-        this.imageUri = imageUri;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    // Métodos Parcelable
+    protected Song(Parcel in) {
+        title = in.readString();
+        artist = in.readString();
+        audioPath = in.readString();
+        imagePath = in.readString();
+    }
+
+    // CREATOR para crear el objeto Song a partir del Parcel
+    public static final Creator<Song> CREATOR = new Creator<Song>() {
+        @Override
+        public Song createFromParcel(Parcel in) {
+            return new Song(in);
+        }
+
+        @Override
+        public Song[] newArray(int size) {
+            return new Song[size];
+        }
+    };
+
+    // Describe los contenidos (en este caso, no hay nada especial que describir)
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    // Escribe el objeto en el Parcel
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(title);
+        dest.writeString(artist);
+        dest.writeString(audioPath);
+        dest.writeString(imagePath);
     }
 }
