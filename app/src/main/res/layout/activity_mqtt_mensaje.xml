@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Título de la actividad -->
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MQTT Mensajes"
+        android:textSize="24sp"
+        android:layout_marginBottom="20dp"
+        android:textColor="@android:color/black" />
+
+    <!-- Área donde se mostrará el mensaje recibido -->
+    <TextView
+        android:id="@+id/textViewMensaje"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Esperando mensaje..."
+        android:textSize="18sp"
+        android:layout_marginBottom="20dp"
+        android:textColor="@android:color/black" />
+
+    <!-- Campo para ingresar mensaje -->
+    <EditText
+        android:id="@+id/editTextMensaje"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Escribe un mensaje"
+        android:textSize="16sp"
+        android:layout_marginBottom="20dp" />
+
+    <!-- Botón para publicar un mensaje -->
+    <Button
+        android:id="@+id/buttonPublicarMensaje"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Publicar mensaje MQTT"
+        android:layout_marginBottom="20dp"
+        android:onClick="onPublicarMensaje" />
+
+    <!-- Botón para ver las canciones o cualquier otra acción -->
+    <Button
+        android:id="@+id/buttonVerCanciones"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ver canciones"
+        android:layout_marginBottom="20dp"
+        android:onClick="onVerCanciones" />
+
+</LinearLayout>

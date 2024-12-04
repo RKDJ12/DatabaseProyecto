@@ -165,8 +165,21 @@ public class MainActivity extends AppCompatActivity {
 
         if (audioFilePath != null && imageFilePath != null) {
             Song newSong = new Song(nombre, artista, audioFilePath, imageFilePath);
-            songList.add(newSong);
+            songList.add(newSong);  // Agregar a la lista local
             songAdapter.notifyItemInserted(songList.size() - 1);
+
+            // Guardar la canción en Firebase
+            DatabaseReference database = FirebaseDatabase.getInstance().getReference("songs");
+            String songId = database.push().getKey();  // Genera un ID único para la canción
+            if (songId != null) {
+                database.child(songId).setValue(newSong)
+                        .addOnSuccessListener(aVoid -> {
+                            Toast.makeText(MainActivity.this, "Canción agregada correctamente", Toast.LENGTH_SHORT).show();
+                        })
+                        .addOnFailureListener(e -> {
+                            Toast.makeText(MainActivity.this, "Error al agregar la canción a Firebase", Toast.LENGTH_SHORT).show();
+                        });
+            }
 
             // Limpiar campos
             txtNombre.setText("");
@@ -174,6 +187,7 @@ public class MainActivity extends AppCompatActivity {
             imagenCancion.setImageResource(R.drawable.logo);
         }
     }
+
 
     private void deleteSelectedSong() {
         if (selectedSongToDelete != null) {

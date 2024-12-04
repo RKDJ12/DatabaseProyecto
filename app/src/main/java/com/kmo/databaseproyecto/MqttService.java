@@ -6,7 +6,6 @@ import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
-import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
@@ -15,6 +14,11 @@ public class MqttService {
     private static final String BROKER_URL = "tcp://broker.hivemq.com:1883";
     private static final String TOPIC = "songs/add";
     private MqttClient client;
+    private MessageListener messageListener;
+
+    public interface MessageListener {
+        void onMessageReceived(String message);
+    }
 
     public MqttService() {
         try {
@@ -29,7 +33,10 @@ public class MqttService {
 
                 @Override
                 public void messageArrived(String topic, MqttMessage message) {
-                    Log.d("MqttService", "Mensaje recibido: " + new String(message.getPayload()));
+                    // Notificar el mensaje recibido a la actividad
+                    if (messageListener != null) {
+                        messageListener.onMessageReceived(new String(message.getPayload()));
+                    }
                 }
 
                 @Override
@@ -38,9 +45,13 @@ public class MqttService {
                 }
             });
             client.connect(connectOptions);
-        } catch (MqttException e) {
+        } catch (Exception e) {
             Log.e("MqttService", "Error al conectar con el broker", e);
         }
+    }
+
+    public void setMessageListener(MessageListener listener) {
+        this.messageListener = listener;
     }
 
     public void publishSong(Song song) {
@@ -49,7 +60,7 @@ public class MqttService {
             MqttMessage mqttMessage = new MqttMessage(message.getBytes());
             client.publish(TOPIC, mqttMessage);
             Log.d("MqttService", "Mensaje publicado: " + message);
-        } catch (MqttException e) {
+        } catch (Exception e) {
             Log.e("MqttService", "Error al publicar", e);
         }
     }
