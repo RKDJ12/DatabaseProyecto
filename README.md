@@ -15,7 +15,7 @@ Este es un proyecto de reproductor de música que permite al usuario agregar can
 - Se seleccionó una canción desde el almacenamiento local y se agregó correctamente a la lista de canciones.
 - Pantallazo de la interfaz mostrando la canción agregada.
 
-  [Pantallazo de canción agregada](assets/images/CancionAgregada.png)
+  ![Pantallazo de canción agregada](assets/images/CancionAgregada.png)
 
 ### 2. **Prueba de reproducción de música**
 - Se seleccionó una canción y se reprodujo correctamente utilizando un reproductor local en la tablet.
@@ -31,15 +31,14 @@ Este es un proyecto de reproductor de música que permite al usuario agregar can
 
 ### 4. **Prueba de envío de mensaje MQTT**
 - Se envió un mensaje a través del servidor MQTT con la información de la canción y se recibió correctamente en el suscriptor.
+- Layout del MQTT
+  ![Pantallazo del men saje](assets/images/mqtt.png)
 - Pantallazo de la consola mostrando el mensaje recibido.
-
-  ![Pantallazo del mensaje MQTT](assets/images/mqtt.png)
-  
-   ![Pantallazo del mensaje MQTT](assets/images/mqtt1.png)
+  ![Pantallazo del mensaje MQTT](assets/images/mqtt1.png)
   
 
 ## Enlace al repositorio Git
-- [GitHub Repository]([tu_enlace_al_repositorio](https://github.com/RKDJ12/DatabaseProyecto/))
+- [GitHub Repository]([https://github.com/RKDJ12/DatabaseProyecto])
 
 ## Instalación
 1. Clona el repositorio:
