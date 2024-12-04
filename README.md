@@ -33,6 +33,7 @@ Este es un proyecto de reproductor de música que permite al usuario agregar can
 - Se envió un mensaje a través del servidor MQTT con la información de la canción y se recibió correctamente en el suscriptor.
 - Layout del MQTT
   ![Pantallazo del men saje](assets/images/mqtt.png)
+  
 - Pantallazo de la consola mostrando el mensaje recibido.
   ![Pantallazo del mensaje MQTT](assets/images/mqtt1.png)
   
@@ -43,7 +44,7 @@ Este es un proyecto de reproductor de música que permite al usuario agregar can
 ## Instalación
 1. Clona el repositorio:
    ```bash
-   git clone <enlace_git>
+   git clone <https://github.com/RKDJ12/DatabaseProyecto.git>
 
 Requerimientos
 Android Studio
